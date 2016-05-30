@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1 {
+  text-align: center;
+}
+#player1 {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+#player2 {
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div id="logo">
+  <h1>Betting Game</h1><br>
+</div>
+<div id="player1">
+  <h2>Player 1</h2></center>
+  <form name="bettingform1">
+    <h3>How much did you want to bet? ONLY 5 - 10 Dollars</h3>
+    <input type="text" placeholder="5..10" name="bet1" id="bet1">
+    <h3>What number do you pick? ONLY 1 - 10</h3>
+    <input type="text" placeholder="1..10" name="pick1" id="pick1">
+    <p><input name="Submit" type="submit" value="guess"/></p>
+  </form>
+</div>
+<div id="player2">
+  <h2>Player 2</h2>
+  <form name="bettingform2">
+    <h3>How much did you want to bet? ONLY 5 - 10 Dollars</h3>
+    <input type="text" placeholder="5..10" name="bet2" id="bet2">
+    <h3>What number do you pick? ONLY 1 - 10</h3>
+    <input type="text" placeholder="1..10" name="pick2" id="pick2">
+    <p><input name="Submit" type="submit" value="guess"/></p>
+  </form>
+</div>
+<script src="jquery-2.1.4.min.js"></script>
+<script src="betting_game.js"></script>
+</body>
+</html>
