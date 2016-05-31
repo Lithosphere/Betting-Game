@@ -1,77 +1,73 @@
-var player1 = {money: 100};
-var player2 = {money: 100};
+$(function() {
 
+  $("#restart").hide();
 
+  var player = {money: 100};
+  var bet = $( '#bet' );
+  var pick = $( '#pick' );
 
-function randomizeNumber() {
-  random = (Math.random() * 10 + 1);
-  return parseInt(random, 10);
-}
-
-function numberChecker(random, picked) {
-  var difference = random - picked;
-  if (difference < 0) {
-    return difference * -1;
-  }
-  else {
-    return difference;
-  }
-}
-
-function gameAction(player, amount, difference) {
-  if (difference > 1) {
-    player.money = player.money - amount;
-    return player.money;
-  }
-  else if (difference == 0) {
-    player.money = player.money + amount;
-    return player.money;
-  }
-  else if (difference == 1) {
-    return player.money;
-  }
-}
-
-// var bet = prompt("Please enter your bet from 5 to 10", 5);
-
-function betChecker(bet) {
-  while (bet < 5 || bet > 10) {
-    if (bet == null) {
-      break;
+  $( '#restart' ).click(function( event ) {
+    reset();
+        if (player.money > 0) {
+      console.log(" money is greater than 0")
+      $( '#restart' ).hide();
     }
-    bet = prompt("Please enter your bet from 5 to 10, you did not follow instructions last time.", 5);
-  }
-}
-function pickChecker(pick) {
-  while (pick < 1 || pick > 10) {
-    if (pick == null) {
-      break;
+    else {
+      console.log("money is less than zero")
+      $("#restart").show();
     }
-    pick = prompt("Please choose a number between 1 to 10, you did not follow instructions last time.");
-  }
-}
-function game(player1, player2) {
-  while (player1.money > 0 && player2.money > 0) {
-      window.alert("Welcome! Player 1, it's your turn!");
-      var bet = prompt("Please enter your bet from 5 to 10", 5);
-      betChecker(bet);
-      var pick = prompt("Please choose a number between 1 to 10");
-      pickChecker(pick);
-      var a = parseInt(randomizeNumber());
-      alert("the number chosen is: " + a);
-      gameAction(player1, bet, numberChecker(a, pick));
-      alert("player 1's current money: " + player1.money);
+  });
 
-      window.alert("Player 2! It's your turn!");
-      var bet = prompt("Please enter your bet from 5 to 10", 5);
-      betChecker(bet);
-      var pick = prompt("Please choose a number between 1 to 10");
-      pickChecker(pick);
-      var a = parseInt(randomizeNumber());
-      alert("the number chosen is: " + a);
-      gameAction(player2, bet, numberChecker(a, pick));
-      alert("player 2's current money: " + player2.money)
+  function reset() {
+    player = {money: 100};
+    return player.money
   }
-  alert("GAME OVER!!!");
-}
+
+  function randomizeNumber() {
+    var randomNumber = (Math.random() * 10 );
+    return Math.round(randomNumber);
+  }
+
+  function numberChecker(random, picked) {
+    var difference = random - picked;
+    return Math.abs(difference);
+  }
+
+  function gameAction(player, amount, difference) {
+    if (difference > 1) {
+      player.money = player.money - amount;
+    }
+    else if (difference == 0) {
+      player.money = player.money + amount;
+    }
+    return player.money;
+  }
+
+
+function game() {
+
+  $( 'form' ).submit(function( event ) 
+  {
+    var a = randomizeNumber();
+    var bet_value = parseInt(bet.val());
+    var pick_value = parseInt(pick.val());
+    gameAction(player, bet_value, numberChecker(a, pick_value));
+    alert("the random number chosen is: " + a);
+    alert("player's current money: " + player.money);
+    event.preventDefault();
+    
+    if (player.money > 0) {
+      console.log(" money is greater than 0")
+      $( '#restart' ).hide();
+    }
+    else {
+      console.log("money is less than zero")
+      $("#restart").show();
+    }
+  }); 
+} //function game bracket
+
+game();
+
+});//main function() bracket
 
